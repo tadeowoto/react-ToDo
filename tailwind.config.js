@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        primaryFont: ['IBM Plex Mono', 'monospace'],
+        secondaryFont: ['VT323', 'monospace'],
+      },
       colors:{
         bgColor: '#008080',
         navColor: '#000080',
