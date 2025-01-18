@@ -1,7 +1,7 @@
 
 const CreateToDo = () => {
   return (
-    <button>+</button>
+    <button>Add Task</button>
   )
 }
 
