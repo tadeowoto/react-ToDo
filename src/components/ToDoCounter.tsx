@@ -6,7 +6,7 @@ type Props = {
 
 const ToDoCounter = ( {completed, total}: Props ) => {
   return (
-    <h1>You completed {completed} out of {total} tasks</h1>
+    <h1 className="font-primaryFont text-sm">{total} tasks | {completed} completed</h1>
   )
 }
 
