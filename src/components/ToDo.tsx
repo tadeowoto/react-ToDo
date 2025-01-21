@@ -28,6 +28,22 @@ const ToDo = () => {
 
   const completedTodos = toDoTasks.filter((task) => task.completed).length;
   const totalTodos = toDoTasks.length;
+  const filteredTodos = toDoTasks.filter((task) => task.task.toLowerCase().includes(search.toLowerCase()));
+
+  const finishTodo = ( id: number ) => {
+    
+    const newTodos = [... toDoTasks];
+    const todoIndex = newTodos.findIndex((task) => task.id === id);
+    newTodos[todoIndex].completed= true
+    setToDoTasks(newTodos)
+  }
+  const deleteTodo = ( id: number ) => {
+    
+    const newTodos = [... toDoTasks];
+    const todoIndex = newTodos.findIndex((task) => task.id === id);
+    newTodos.splice(todoIndex, 1)
+    setToDoTasks(newTodos)
+  }
 
   return (
     <article className="w-[506px] h-[262px] bg-cardBg border-[3px] border-t-[#dfdfdf] border-r-[#808080] border-b-[#808080] border-l-[#dfdfdf]">
@@ -45,8 +61,8 @@ const ToDo = () => {
           </div>
           <div className="w-full h-3/5 overflow-y-scroll ">
               <ToDoList>
-                {toDoTasks.map((task) => (
-                  <ToDoItem key={task.id} task={task.task} completed={task.completed} />
+                {filteredTodos.map((task) => (
+                  <ToDoItem key={task.id} task={task.task} completed={task.completed} onComplete={() => finishTodo(task.id)} onDelete={() => deleteTodo(task.id)} />
                 ))}
               </ToDoList>
           </div>
