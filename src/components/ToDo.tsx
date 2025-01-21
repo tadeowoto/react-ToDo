@@ -5,56 +5,30 @@ import ToDoSearch from "./ToDoSearch";
 import ToDoItem from "./ToDoItem";
 import ToDoNav from "./ToDoNav";
 import SearchBar from "./SearchBar";
+import { useState } from "react";
 
-const toDoTasks = [
+const defaultTodos = [
   {
     id: 1,
-    task: "task 1",
+    task: "Do homework",
+    completed: false
   },
   {
     id: 2,
-    task: "task 2",
-  },
-  {
-    id: 3,
-    task: "task 3",
-  },
-  {
-    id: 4,
-    task: "task 4",
-  },
-  {
-    id: 5,
-    task: "task 5",
-  },
-  {
-    id: 6,
-    task: "task 6",
-  },
-  {
-    id: 7,
-    task: "task 7",
-  },
-  {
-    id: 8,
-    task: "task 8",
-  },
-  {
-    id: 9,
-    task: "task 9",
-  },
-  {
-    id: 10,
-    task: "task 10",
-  },
-  {
-    id: 11,
-    task: "task 11",
+    task: "Go to the gym",
+    completed: true
   },
 ];
 
 
 const ToDo = () => {
+
+  const [search, setSearch] = useState('');
+  const [toDoTasks, setToDoTasks] = useState(defaultTodos); //set todos es para crear todos
+
+  const completedTodos = toDoTasks.filter((task) => task.completed).length;
+  const totalTodos = toDoTasks.length;
+
   return (
     <article className="w-[506px] h-[262px] bg-cardBg border-[3px] border-t-[#dfdfdf] border-r-[#808080] border-b-[#808080] border-l-[#dfdfdf]">
       <ToDoNav />
@@ -64,18 +38,21 @@ const ToDo = () => {
               <CreateToDo />
           </div>
           <div className="w-full mt-2">
-              <SearchBar />
+              <SearchBar 
+                search={search}
+                setSearch={setSearch}
+              />
           </div>
           <div className="w-full h-3/5 overflow-y-scroll ">
               <ToDoList>
                 {toDoTasks.map((task) => (
-                  <ToDoItem key={task.id} task={task.task} />
+                  <ToDoItem key={task.id} task={task.task} completed={task.completed} />
                 ))}
               </ToDoList>
           </div>
       </div>
       <div className="w-full h-fit flex align-center ml-1">
-          <ToDoCounter completed={1} total={3} />
+          <ToDoCounter completed={completedTodos} total={totalTodos} />
       </div>
     </article>
   )
