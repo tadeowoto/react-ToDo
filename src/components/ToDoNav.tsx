@@ -8,9 +8,9 @@ const ToDoNav = () => {
             <p className="text-white font-secondaryFont text-xl">Task Manager</p>
         </div>
         <div className="flex items-center justify-end gap-1">
-            <NavOption src="../public/minimize.svg" type={2} />
-            <NavOption src="../public/maximize.svg" type={3} />
-            <NavOption src="../public/close.svg" type={1} />
+            <NavOption src="/minimize.svg" type={2} />
+            <NavOption src="/maximize.svg" type={3} />
+            <NavOption src="/close.svg" type={1} />
         </div>
     </nav>
   )

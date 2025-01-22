@@ -59,7 +59,7 @@ const ToDo = () => {
                 setSearch={setSearch}
               />
           </div>
-          <div className="w-full h-3/5 overflow-y-scroll ">
+          <div className="w-full h-3/5 overflow-auto  ">
               <ToDoList>
                 {filteredTodos.map((task) => (
                   <ToDoItem key={task.id} task={task.task} completed={task.completed} onComplete={() => finishTodo(task.id)} onDelete={() => deleteTodo(task.id)} />
