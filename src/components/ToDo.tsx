@@ -8,7 +8,7 @@ import ToDoNav from "./ToDoNav";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 
-/*   const defaultTodos = [
+  /* const defaultTodos = [
   {
     id: 1,
     task: "Do homework",
@@ -21,42 +21,46 @@ import { useState } from "react";
   },
 ];
 
-localStorage.setItem('TODOS-V1', JSON.stringify(defaultTodos)); */
+localStorage.setItem('TODOS-V1', JSON.stringify(defaultTodos));  */
+
+function useLocalStorage(itemName : string, initialValue : any) {
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItems;
+
+  if(!localStorageItem){
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItems = []
+  }else{
+    parsedItems = JSON.parse(localStorageItem);
+  }
+  const [items, setItems] = useState(parsedItems);
+  const saveItems = (newItem : any) => {
+    localStorage.setItem(itemName, JSON.stringify(newItem));
+    setItems(newItem)
+  }
+
+  return [items , saveItems]
+  
+}
+
 const ToDo = () => {
 
-  
-  const localStorageTodos = localStorage.getItem('TODOS-V1');
-  let parsedTodos;
-
-  if(!localStorageTodos){
-    localStorage.setItem('TODOS-V1', JSON.stringify([]));
-    parsedTodos = []
-  }else{
-    parsedTodos = JSON.parse(localStorageTodos);
-  }
-
-
+  const [todos, saveTodos] = useLocalStorage('TODOS-V1', []); 
   const [search, setSearch] = useState('');
-  const [toDoTasks, setToDoTasks] = useState(parsedTodos); //set todos es para crear todos
+  const completedTodos = todos.filter((task : any) => task.completed).length;
+  const totalTodos = todos.length;
+  const filteredTodos = todos.filter((task : any) => task.task.toLowerCase().includes(search.toLowerCase()));
 
-  const completedTodos = toDoTasks.filter((task) => task.completed).length;
-  const totalTodos = toDoTasks.length;
-  const filteredTodos = toDoTasks.filter((task) => task.task.toLowerCase().includes(search.toLowerCase()));
 
-  const saveTodos = (newTodos) => {
-    localStorage.setItem('TODOS-V1', JSON.stringify(newTodos));
-
-    setToDoTasks(newTodos)
-  }
 
   const finishTodo = ( id: number ) => {
-    const newTodos = [... toDoTasks];
+    const newTodos = [... todos];
     const todoIndex = newTodos.findIndex((task) => task.id === id);
     newTodos[todoIndex].completed= true
     saveTodos(newTodos)
   }
   const deleteTodo = ( id: number ) => {
-    const newTodos = [... toDoTasks];
+    const newTodos = [... todos];
     const todoIndex = newTodos.findIndex((task) => task.id === id);
     newTodos.splice(todoIndex, 1)
     saveTodos(newTodos)
@@ -78,7 +82,7 @@ const ToDo = () => {
           </div>
           <div className="w-full h-3/5 overflow-auto  ">
               <ToDoList>
-                {filteredTodos.map((task) => (
+                {filteredTodos.map((task : any) => (
                   <ToDoItem key={task.id} task={task.task} completed={task.completed} onComplete={() => finishTodo(task.id)} onDelete={() => deleteTodo(task.id)} />
                 ))}
               </ToDoList>
