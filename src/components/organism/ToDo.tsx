@@ -7,6 +7,7 @@ import ToDoItem from "../molecules/ToDoItem";
 import ToDoNav from "../molecules/ToDoNav";
 import SearchBar from "../atoms/SearchBar";
 import { useState } from "react";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
   /* const defaultTodos = [
   {
@@ -23,25 +24,6 @@ import { useState } from "react";
 
 localStorage.setItem('TODOS-V1', JSON.stringify(defaultTodos));  */
 
-function useLocalStorage(itemName : string, initialValue : any) {
-  const localStorageItem = localStorage.getItem(itemName);
-  let parsedItems;
-
-  if(!localStorageItem){
-    localStorage.setItem(itemName, JSON.stringify(initialValue));
-    parsedItems = []
-  }else{
-    parsedItems = JSON.parse(localStorageItem);
-  }
-  const [items, setItems] = useState(parsedItems);
-  const saveItems = (newItem : any) => {
-    localStorage.setItem(itemName, JSON.stringify(newItem));
-    setItems(newItem)
-  }
-
-  return [items , saveItems]
-  
-}
 
 const ToDo = () => {
 
