@@ -1,3 +1,4 @@
+/* eslint-disable */
 import CreateToDo from "./CreateToDo";
 import ToDoCounter from "./ToDoCounter";
 import ToDoList from "./ToDoList";
@@ -7,7 +8,7 @@ import ToDoNav from "./ToDoNav";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 
-const defaultTodos = [
+/*   const defaultTodos = [
   {
     id: 1,
     task: "Do homework",
@@ -20,27 +21,45 @@ const defaultTodos = [
   },
 ];
 
-
+localStorage.setItem('TODOS-V1', JSON.stringify(defaultTodos)); */
 const ToDo = () => {
 
+  
+  const localStorageTodos = localStorage.getItem('TODOS-V1');
+  let parsedTodos;
+
+  if(!localStorageTodos){
+    localStorage.setItem('TODOS-V1', JSON.stringify([]));
+    parsedTodos = []
+  }else{
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
+
   const [search, setSearch] = useState('');
-  const [toDoTasks, setToDoTasks] = useState(defaultTodos); //set todos es para crear todos
+  const [toDoTasks, setToDoTasks] = useState(parsedTodos); //set todos es para crear todos
 
   const completedTodos = toDoTasks.filter((task) => task.completed).length;
   const totalTodos = toDoTasks.length;
   const filteredTodos = toDoTasks.filter((task) => task.task.toLowerCase().includes(search.toLowerCase()));
 
+  const saveTodos = (newTodos) => {
+    localStorage.setItem('TODOS-V1', JSON.stringify(newTodos));
+
+    setToDoTasks(newTodos)
+  }
+
   const finishTodo = ( id: number ) => {
     const newTodos = [... toDoTasks];
     const todoIndex = newTodos.findIndex((task) => task.id === id);
     newTodos[todoIndex].completed= true
-    setToDoTasks(newTodos)
+    saveTodos(newTodos)
   }
   const deleteTodo = ( id: number ) => {
     const newTodos = [... toDoTasks];
     const todoIndex = newTodos.findIndex((task) => task.id === id);
     newTodos.splice(todoIndex, 1)
-    setToDoTasks(newTodos)
+    saveTodos(newTodos)
   }
 
   return (
