@@ -31,14 +31,12 @@ const ToDo = () => {
   const filteredTodos = toDoTasks.filter((task) => task.task.toLowerCase().includes(search.toLowerCase()));
 
   const finishTodo = ( id: number ) => {
-    
     const newTodos = [... toDoTasks];
     const todoIndex = newTodos.findIndex((task) => task.id === id);
     newTodos[todoIndex].completed= true
     setToDoTasks(newTodos)
   }
   const deleteTodo = ( id: number ) => {
-    
     const newTodos = [... toDoTasks];
     const todoIndex = newTodos.findIndex((task) => task.id === id);
     newTodos.splice(todoIndex, 1)
