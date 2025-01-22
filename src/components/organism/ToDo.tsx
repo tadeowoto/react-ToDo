@@ -1,11 +1,11 @@
 /* eslint-disable */
-import CreateToDo from "./CreateToDo";
-import ToDoCounter from "./ToDoCounter";
-import ToDoList from "./ToDoList";
-import ToDoSearch from "./ToDoSearch";
-import ToDoItem from "./ToDoItem";
-import ToDoNav from "./ToDoNav";
-import SearchBar from "./SearchBar";
+import CreateToDo from "../atoms/CreateToDo";
+import ToDoCounter from "../atoms/ToDoCounter";
+import ToDoList from "../molecules/ToDoList";
+import ToDoSearch from "../atoms/ToDoSearch";
+import ToDoItem from "../molecules/ToDoItem";
+import ToDoNav from "../molecules/ToDoNav";
+import SearchBar from "../atoms/SearchBar";
 import { useState } from "react";
 
   /* const defaultTodos = [

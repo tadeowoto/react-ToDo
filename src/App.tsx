@@ -1,5 +1,5 @@
 
-import ToDo from "./components/ToDo";
+import ToDo from "./components/organism/ToDo";
 
 function App() {
   return (

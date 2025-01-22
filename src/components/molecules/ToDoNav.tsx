@@ -1,4 +1,4 @@
-import NavOption from "./NavOption"
+import NavOption from "../atoms/NavOption"
 
 const ToDoNav = () => {
   return (
