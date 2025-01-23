@@ -6,6 +6,9 @@ import ToDoSearch from "../atoms/ToDoSearch";
 import ToDoItem from "../molecules/ToDoItem";
 import ToDoNav from "../molecules/ToDoNav";
 import SearchBar from "../atoms/SearchBar";
+import TodosEmpty from "../atoms/TodosEmpty";
+import TodosError from "../atoms/TodosError";
+import TodosSkeleton from "../atoms/TodosSkeleton";
 import { useState } from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
@@ -65,9 +68,9 @@ const ToDo = () => {
         </div>
         <div className="w-full h-3/5 overflow-auto  ">
           <ToDoList>
-            {loading && <p className="text-center font-secondaryFont text-2xl">Loading...</p>}
-            {error && <p className="text-center font-secondaryFont text-2xl">Error</p>}
-            {!loading && filteredTodos.length === 0 && <p className="text-center font-secondaryFont text-2xl">No task yet</p>}
+            {loading && <TodosSkeleton /> }
+            {error && <TodosError /> }
+            {!loading && filteredTodos.length === 0 && <TodosEmpty />}
 
             {filteredTodos.map((task: any) => (
               <ToDoItem
