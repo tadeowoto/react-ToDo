@@ -1,13 +1,14 @@
-
 type Props = {
-    completed: number,
-    total: number
-}
+  completed: number;
+  total: number;
+};
 
-const ToDoCounter = ( {completed, total}: Props ) => {
+const ToDoCounter = ({ completed, total }: Props) => {
   return (
-    <h1 className="font-primaryFont text-sm">{total} tasks | {completed} completed</h1>
-  )
-}
+    <h1 className="font-primaryFont text-sm">
+      {total} tasks | {completed} completed
+    </h1>
+  );
+};
 
-export default ToDoCounter
+export default ToDoCounter;

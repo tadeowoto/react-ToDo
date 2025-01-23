@@ -1,11 +1,9 @@
-
 type Props = {
   search: string;
   setSearch: (search: string) => void;
 };
 
-const SearchBar = ({search, setSearch}: Props) => {
-
+const SearchBar = ({ search, setSearch }: Props) => {
   return (
     <input
       type="text"

@@ -32,8 +32,8 @@ const ToDo = () => {
     items: todos,
     saveItems: saveTodos,
     loading,
-    error
-    } = useLocalStorage("TODOS-V1", []);
+    error,
+  } = useLocalStorage("TODOS-V1", []);
 
   const [search, setSearch] = useState("");
   const completedTodos = todos.filter((task: any) => task.completed).length;
@@ -68,8 +68,8 @@ const ToDo = () => {
         </div>
         <div className="w-full h-3/5 overflow-auto  ">
           <ToDoList>
-            {loading && <TodosSkeleton /> }
-            {error && <TodosError /> }
+            {loading && <TodosSkeleton />}
+            {error && <TodosError />}
             {!loading && filteredTodos.length === 0 && <TodosEmpty />}
 
             {filteredTodos.map((task: any) => (
