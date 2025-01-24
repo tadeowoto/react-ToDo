@@ -8,7 +8,7 @@ type Props = {
 const ToDoModal = ({ closeWindow, children }: Props) => {
   return ReactDOM.createPortal(
     <div className="flex justify-center items-center w-full h-screen bg-black bg-opacity-50 fixed top-0 left-0 right-0 bottom-0  ">
-      <div className="Modal w-[378px] h-[174px] bg-cardBg border-2 border-t-[#dfdfdf] border-r-[#808080] border-b-[#808080] border-l-[#dfdfdf]">
+      <div className="Modal w-[378px] h-[184px] bg-cardBg border-2 border-t-[#dfdfdf] border-r-[#808080] border-b-[#808080] border-l-[#dfdfdf]">
         <ModalNav closeWindow={closeWindow} />
         {children}
       </div>

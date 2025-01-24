@@ -2,7 +2,6 @@
 import CreateToDo from "../atoms/CreateToDo";
 import ToDoCounter from "../atoms/ToDoCounter";
 import ToDoList from "../molecules/ToDoList";
-import ToDoSearch from "../atoms/ToDoSearch";
 import ToDoItem from "../molecules/ToDoItem";
 import ToDoNav from "../molecules/ToDoNav";
 import SearchBar from "../atoms/SearchBar";
@@ -45,7 +44,7 @@ const ToDo = () => {
     task.task.toLowerCase().includes(search.toLowerCase())
   );
 
-  const [openModal, setOpenModal] = React.useState(true);
+  const [openModal, setOpenModal] = React.useState(false);
 
   const finishTodo = (id: number) => {
     const newTodos = [...todos];
@@ -64,12 +63,21 @@ const ToDo = () => {
     setOpenModal(!openModal);
   }
 
+  function addTodo(task: string) {
+    const newTodos = [...todos];
+    newTodos.push({
+      id: newTodos.length + 1,
+      task: task,
+      completed: false,
+    });
+    saveTodos(newTodos);
+  }
+
   return (
     <article className="w-[506px] h-[262px] bg-cardBg border-[3px] border-t-[#dfdfdf] border-r-[#808080] border-b-[#808080] border-l-[#dfdfdf]">
       <ToDoNav />
       <div className=" w-full h-3/4 p-4 box-border border-[3px] border-t-[#dfdfdf] border-r-[#808080] border-b-[#808080] border-l-[#dfdfdf]">
         <div className="w-full flex gap-4">
-          <ToDoSearch />
           <CreateToDo createTodo={createTodo} />
         </div>
         <div className="w-full mt-2">
@@ -98,7 +106,7 @@ const ToDo = () => {
       </div>
       {openModal && (
         <ToDoModal closeWindow={createTodo}>
-          <ToDoForm />
+          <ToDoForm addTodo={addTodo} />
         </ToDoModal>
       )}
     </article>
