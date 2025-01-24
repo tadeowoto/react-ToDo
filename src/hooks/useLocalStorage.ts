@@ -38,3 +38,18 @@ function useLocalStorage(itemName: string, initialValue: any) {
 }
 
 export { useLocalStorage };
+
+/* const defaultTodos = [
+  {
+    id: 1,
+    task: "Do homework",
+    completed: false
+  },
+  {
+    id: 2,
+    task: "Go to the gym",
+    completed: true
+  },
+];
+
+localStorage.setItem('TODOS-V1', JSON.stringify(defaultTodos));  */

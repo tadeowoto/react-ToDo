@@ -10,7 +10,9 @@ import TodosEmpty from "../atoms/TodosEmpty";
 import TodosError from "../atoms/TodosError";
 import TodosSkeleton from "../atoms/TodosSkeleton";
 import { useState } from "react";
+import React from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import Modal from "../molecules";
 
 /* const defaultTodos = [
   {
@@ -42,6 +44,8 @@ const ToDo = () => {
     task.task.toLowerCase().includes(search.toLowerCase())
   );
 
+  const [openModal, setOpenModal] = React.useState(true);
+
   const finishTodo = (id: number) => {
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex((task) => task.id === id);
@@ -55,13 +59,17 @@ const ToDo = () => {
     saveTodos(newTodos);
   };
 
+  function createTodo() {
+    setOpenModal(!openModal);
+  }
+
   return (
     <article className="w-[506px] h-[262px] bg-cardBg border-[3px] border-t-[#dfdfdf] border-r-[#808080] border-b-[#808080] border-l-[#dfdfdf]">
       <ToDoNav />
       <div className=" w-full h-3/4 p-4 box-border border-[3px] border-t-[#dfdfdf] border-r-[#808080] border-b-[#808080] border-l-[#dfdfdf]">
         <div className="w-full flex gap-4">
           <ToDoSearch />
-          <CreateToDo />
+          <CreateToDo createTodo={createTodo} />
         </div>
         <div className="w-full mt-2">
           <SearchBar search={search} setSearch={setSearch} />
@@ -87,6 +95,7 @@ const ToDo = () => {
       <div className="w-full h-fit flex align-center ml-1">
         <ToDoCounter completed={completedTodos} total={totalTodos} />
       </div>
+      {openModal && <Modal>la funcionalidad que quiera</Modal>}
     </article>
   );
 };
