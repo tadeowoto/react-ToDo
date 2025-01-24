@@ -13,6 +13,7 @@ import { useState } from "react";
 import React from "react";
 import ToDoModal from "../molecules/ToDoModal";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import ToDoForm from "../molecules/ToDoForm";
 
 /* const defaultTodos = [
   {
@@ -97,8 +98,7 @@ const ToDo = () => {
       </div>
       {openModal && (
         <ToDoModal closeWindow={createTodo}>
-          {" "}
-          CREO LO QUE YO QUIERO ACA{" "}
+          <ToDoForm />
         </ToDoModal>
       )}
     </article>
