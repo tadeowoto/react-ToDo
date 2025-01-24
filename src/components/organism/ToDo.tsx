@@ -11,8 +11,8 @@ import TodosError from "../atoms/TodosError";
 import TodosSkeleton from "../atoms/TodosSkeleton";
 import { useState } from "react";
 import React from "react";
+import ToDoModal from "../molecules/ToDoModal";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import Modal from "../molecules";
 
 /* const defaultTodos = [
   {
@@ -95,7 +95,12 @@ const ToDo = () => {
       <div className="w-full h-fit flex align-center ml-1">
         <ToDoCounter completed={completedTodos} total={totalTodos} />
       </div>
-      {openModal && <Modal>la funcionalidad que quiera</Modal>}
+      {openModal && (
+        <ToDoModal closeWindow={createTodo}>
+          {" "}
+          CREO LO QUE YO QUIERO ACA{" "}
+        </ToDoModal>
+      )}
     </article>
   );
 };
